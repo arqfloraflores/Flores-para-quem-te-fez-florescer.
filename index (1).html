@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arqflora · Flores para quem te fez florescer</title>
+  <meta name="description" content="Arqflora — Catálogo Especial Dia das Mães 2026. Arranjos florais únicos para presentear a pessoa que te fez florescer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      /* Fendi palette */
+      --cream:       #F4EAD9;
+      --ivory:       #FAF6EE;
+      --ivory-warm:  #F7F1E6;
+      --camel:       #C4A882;
+      --camel-light: #DDD0BC;
+      --camel-mid:   #B09060;
+      /* Arqflora */
+      --green:       #3A5438;
+      --green-mid:   #5B7A56;
+      --green-light: #8BA888;
+      /* Neutrals */
+      --dark:        #19110A;
+      --mid:         #4A3728;
+      --muted:       #8A7265;
+      /* Accents */
+      --gold:        #A88840;
+      --blush:       #C8A4A0;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ──────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 48px;
+      transition: padding .4s ease, background .4s ease, border-color .4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(244, 234, 217, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 14px 48px;
+      border-bottom-color: var(--camel-light);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+      transition: color .3s;
+    }
+    nav.scrolled .nav-logo { color: var(--dark); }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.8);
+      text-decoration: none;
+      transition: color .3s;
+    }
+    nav.scrolled .nav-links a { color: var(--mid); }
+    .nav-links a:hover { color: var(--camel); }
+
+    /* ─── HERO ─────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 640px;
+      overflow: hidden;
+      /* Warm gradient shows when photo hasn't loaded yet */
+      background: linear-gradient(140deg,
+        #2D4A2B 0%, #3A5438 28%, #5B7A56 55%, #C4A882 82%, #D9C4A8 100%
+      );
+    }
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      display: block;
+      transform: scale(1.06);
+      transition: transform 9s cubic-bezier(.25,.46,.45,.94);
+      filter: brightness(.9) saturate(1.08);
+    }
+    .hero-photo.ready { transform: scale(1); }
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(42,68,40,.5) 0%, rgba(42,68,40,0) 58%),
+        linear-gradient(to top, rgba(25,17,10,.6) 0%, rgba(25,17,10,0) 52%);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 64px 88px;
+      max-width: 860px;
+    }
+    .hero-eyebrow {
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--camel-light);
+      margin-bottom: 18px;
+      opacity: 0;
+      animation: slideUp .9s .2s both;
+    }
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 7.5vw, 6rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.02;
+      color: #fff;
+      margin-bottom: 26px;
+      opacity: 0;
+      animation: slideUp 1s .45s both;
+    }
+    .hero-headline em {
+      font-style: normal;
+      color: var(--camel-light);
+    }
+    .hero-tagline {
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 42px;
+      opacity: 0;
+      animation: slideUp .9s .7s both;
+    }
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+      padding-bottom: 7px;
+      border-bottom: 1px solid rgba(255,255,255,.35);
+      transition: gap .3s, border-color .3s;
+      opacity: 0;
+      animation: slideUp .9s .95s both;
+      width: fit-content;
+    }
+    .hero-btn:hover { gap: 22px; border-color: #fff; }
+    .hero-btn svg { width: 18px; transition: transform .3s; }
+    .hero-btn:hover svg { transform: translateY(3px); }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(36px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── MARQUEE ──────────────────────────────────────── */
+    .marquee-bar {
+      background: var(--green);
+      overflow: hidden;
+      padding: 13px 0;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marqueeScroll 28s linear infinite;
+    }
+    .marquee-item {
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(250,246,238,.65);
+      padding: 0 36px;
+    }
+    .marquee-item span { color: var(--camel-light); margin-right: 36px; }
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── EDITORIAL SPLIT ──────────────────────────────── */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .split-photo {
+      position: relative;
+      overflow: hidden;
+      min-height: 580px;
+    }
+    .split-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 10%;
+      display: block;
+      transition: transform .9s cubic-bezier(.25,.46,.45,.94);
+    }
+    .split-photo:hover img { transform: scale(1.05); }
+    .split-text {
+      background: var(--green);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 88px 72px;
+    }
+    .split-label {
+      font-size: 0.56rem;
+      font-weight: 400;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--camel-light);
+      margin-bottom: 22px;
+    }
+    .split-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.9rem, 3.2vw, 2.9rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ivory);
+      line-height: 1.22;
+      margin-bottom: 30px;
+    }
+    .split-rule {
+      width: 38px; height: 1px;
+      background: var(--camel);
+      margin-bottom: 28px;
+    }
+    .split-body {
+      font-size: 0.86rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(250,246,238,.68);
+      max-width: 400px;
+    }
+
+    /* ─── PHOTO TRIPTYCH ───────────────────────────────── */
+    .triptych {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 1fr;
+      height: 58vh;
+      min-height: 360px;
+    }
+    .triptych-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .triptych-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform .9s cubic-bezier(.25,.46,.45,.94);
+    }
+    .triptych-item:hover img { transform: scale(1.06); }
+    .triptych-item:nth-child(2) img { object-position: center 20%; }
+    .triptych-item:nth-child(3) img { object-position: center 5%; }
+
+    /* ─── SECTION HEADER ───────────────────────────────── */
+    .s-header {
+      text-align: center;
+      padding: 110px 40px 56px;
+    }
+    .s-label {
+      display: inline-block;
+      font-size: 0.56rem;
+      font-weight: 400;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .s-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--dark);
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+    .s-sub {
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── CATEGORY HEADER ──────────────────────────────── */
+    .cat-bar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 48px 60px 16px;
+    }
+    .cat-bar::before, .cat-bar::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--camel-light);
+    }
+    .cat-name {
+      font-size: 0.56rem;
+      font-weight: 400;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ─── PRODUCT GRID ─────────────────────────────────── */
+    .p-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 1px;
+      background: var(--camel-light);
+    }
+
+    /* ─── PRODUCT CARD ─────────────────────────────────── */
+    .p-card {
+      background: var(--ivory-warm);
+      padding: 50px 42px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      transition: background .3s;
+    }
+    .p-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--green);
+      transform: scaleX(0);
+      transition: transform .35s cubic-bezier(.25,.46,.45,.94);
+      transform-origin: left;
+    }
+    .p-card:hover { background: #fff; }
+    .p-card:hover::before { transform: scaleX(1); }
+
+    .pc-cat {
+      font-size: 0.52rem;
+      font-weight: 400;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 10px;
+    }
+    .pc-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.95rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--dark);
+      line-height: 1.12;
+      margin-bottom: 10px;
+    }
+    .pc-desc {
+      font-size: 0.78rem;
+      font-weight: 300;
+      line-height: 1.78;
+      color: var(--mid);
+      margin-bottom: 28px;
+      letter-spacing: .01em;
+    }
+
+    .sel-label {
+      font-size: 0.5rem;
+      font-weight: 400;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 9px;
+    }
+    .size-row, .color-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 18px;
+    }
+    .size-pill, .color-pill {
+      border: 1px solid var(--camel);
+      background: transparent;
+      padding: 5px 14px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      cursor: pointer;
+      color: var(--mid);
+      transition: background .2s, border-color .2s, color .2s;
+      line-height: 1.6;
+    }
+    .size-pill:hover, .size-pill.on {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: #fff;
+    }
+    .color-pill {
+      border-color: var(--camel-light);
+    }
+    .color-pill:hover, .color-pill.on {
+      background: transparent;
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .pc-price-row {
+      margin: 14px 0 26px;
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+    }
+    .pc-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem;
+      font-weight: 400;
+      color: var(--dark);
+      letter-spacing: .01em;
+    }
+    .pc-price sup {
+      font-size: 1rem;
+      font-weight: 300;
+      vertical-align: super;
+      margin-right: 3px;
+      color: var(--mid);
+    }
+
+    .btn-wa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 13px 20px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .25s, transform .2s;
+    }
+    .btn-wa:hover {
+      background: var(--dark);
+      transform: translateY(-1px);
+    }
+    .btn-wa svg { width: 15px; flex-shrink: 0; }
+
+    /* ─── QUOTE BANNER ─────────────────────────────────── */
+    .quote-banner {
+      position: relative;
+      height: 68vh;
+      min-height: 460px;
+      overflow: hidden;
+      margin-top: 1px;
+    }
+    .quote-banner img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+      display: block;
+    }
+    .quote-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(25,17,10,.6) 0%, rgba(25,17,10,.18) 100%);
+      display: flex;
+      align-items: center;
+      padding: 0 10%;
+    }
+    .quote-text {
+      max-width: 600px;
+    }
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 6rem;
+      line-height: 0;
+      color: var(--camel);
+      opacity: .45;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .quote-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+    .quote-attr {
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+    }
+
+    /* ─── INFO STRIP ───────────────────────────────────── */
+    .info-strip {
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: linear-gradient(135deg, #19110A 0%, #2E1F12 100%);
+    }
+    .info-block {
+      padding: 72px 56px;
+      border-right: 1px solid rgba(196,168,130,.12);
+    }
+    .info-block:last-child { border: none; }
+    .ib-label {
+      font-size: 0.54rem;
+      font-weight: 400;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--camel);
+      margin-bottom: 18px;
+    }
+    .ib-text {
+      font-size: 0.84rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(250,246,238,.6);
+    }
+    .ib-text a {
+      color: var(--camel-light);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .ib-text a:hover { color: #fff; }
+    .ib-rule {
+      width: 28px; height: 1px;
+      background: var(--camel-mid);
+      margin: 18px 0;
+    }
+
+    /* ─── FOOTER ───────────────────────────────────────── */
+    footer {
+      background: var(--green);
+      padding: 40px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .ft-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ivory);
+    }
+    .ft-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .ft-links a {
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(250,246,238,.55);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .ft-links a:hover { color: var(--ivory); }
+    .ft-copy {
+      font-size: 0.56rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: rgba(250,246,238,.38);
+    }
+
+    /* ─── FLOATING WA ──────────────────────────────────── */
+    .float-wa {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 300;
+      width: 52px; height: 52px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.35);
+      text-decoration: none;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .float-wa:hover {
+      transform: scale(1.12) translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37,211,102,.45);
+    }
+    .float-wa svg { width: 26px; }
+
+    /* ─── REVEAL ANIMATION ─────────────────────────────── */
+    .rv {
+      opacity: 0;
+      transform: translateY(44px);
+      transition: opacity .9s ease, transform .9s ease;
+    }
+    .rv.vis { opacity: 1; transform: translateY(0); }
+    .rv.delay-1 { transition-delay: .1s; }
+    .rv.delay-2 { transition-delay: .2s; }
+    .rv.delay-3 { transition-delay: .3s; }
+
+    /* ─── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .split { grid-template-columns: 1fr; }
+      .split-photo { min-height: 48vw; }
+      .split-text { padding: 72px 56px; }
+      .info-strip { grid-template-columns: 1fr; }
+      .info-block { border-right: none; border-bottom: 1px solid rgba(196,168,130,.12); padding: 56px 44px; }
+      .info-block:last-child { border: none; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 16px 26px; }
+      nav.scrolled { padding: 12px 26px; }
+      .nav-links { display: none; }
+      .hero-inner { padding: 0 30px 64px; }
+      .split-text { padding: 56px 36px; }
+      .triptych { grid-template-columns: 1fr; height: auto; }
+      .triptych-item { height: 60vw; }
+      .s-header { padding: 80px 30px 40px; }
+      .cat-bar { padding: 36px 30px 12px; }
+      .p-card { padding: 40px 30px 36px; }
+      .info-block { padding: 50px 30px; }
+      footer { flex-direction: column; text-align: center; padding: 36px 30px; }
+      .ft-links { justify-content: center; flex-wrap: wrap; }
+      .quote-overlay { padding: 0 8%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Arqflora</a>
+    <ul class="nav-links">
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#info">Informações</a></li>
+      <li><a href="https://wa.me/554832829895" target="_blank" rel="noopener">WhatsApp</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img class="hero-photo" id="heroBg" src="images/0105_dia-das-maes.jpg" alt="" aria-hidden="true">
+    <div class="hero-vignette"></div>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Arqflora · Dia das Mães 2026</p>
+      <h1 class="hero-headline">
+        Flores para quem<br>te fez <em>florescer.</em>
+      </h1>
+      <p class="hero-tagline">Arranjos especiais · Design floral · Florianópolis</p>
+      <a href="#catalogo" class="hero-btn">
+        Descobrir os arranjos
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M19 9l-7 7-7-7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item"><span>✦</span> Flores para quem te fez florescer</span>
+      <span class="marquee-item"><span>✦</span> Design Floral · Arqflora</span>
+      <span class="marquee-item"><span>✦</span> Dia das Mães 2026</span>
+      <span class="marquee-item"><span>✦</span> Arranjos artesanais · Florianópolis</span>
+      <span class="marquee-item"><span>✦</span> Entrega em Jurerê</span>
+      <span class="marquee-item"><span>✦</span> Flores para quem te fez florescer</span>
+      <span class="marquee-item"><span>✦</span> Design Floral · Arqflora</span>
+      <span class="marquee-item"><span>✦</span> Dia das Mães 2026</span>
+      <span class="marquee-item"><span>✦</span> Arranjos artesanais · Florianópolis</span>
+      <span class="marquee-item"><span>✦</span> Entrega em Jurerê</span>
+    </div>
+  </div>
+
+  <!-- EDITORIAL SPLIT -->
+  <div class="split">
+    <div class="split-photo rv">
+      <img src="images/0121_dia-das-maes.jpg" alt="Mãe e filha com buquê de flores">
+    </div>
+    <div class="split-text rv delay-1">
+      <p class="split-label">Nossa história · Nosso propósito</p>
+      <h2 class="split-headline">
+        Antes de ser quem<br>você é, você foi<br>cuidado por alguém.
+      </h2>
+      <div class="split-rule"></div>
+      <p class="split-body">
+        Essa pessoa reconheceu seu choro, entendeu seu silêncio, celebrou cada pequena conquista como se fosse a maior do mundo. Neste Dia das Mães, a Arqflora preparou uma seleção de arranjos especiais — cada peça pensada para traduzir em beleza viva o que você sente, mas às vezes não sabe como dizer.
+        <br><br>
+        Porque flores falam. E ela merece ouvir.
+      </p>
+    </div>
+  </div>
+
+  <!-- TRIPTYCH -->
+  <div class="triptych">
+    <div class="triptych-item">
+      <img src="images/0185_dia-das-maes.jpg" alt="Filho presenteando a mãe com uma rosa">
+    </div>
+    <div class="triptych-item">
+      <img src="images/0182_dia-das-maes.jpg" alt="Mãe recebendo arranjo de flores">
+    </div>
+    <div class="triptych-item">
+      <img src="images/0164_dia-das-maes.jpg" alt="Mulher com flower box">
+    </div>
+  </div>
+
+  <!-- CATALOG -->
+  <div id="catalogo">
+
+    <div class="s-header rv">
+      <span class="s-label">Seleção Especial · Dia das Mães 2026</span>
+      <h2 class="s-title">Nossa coleção<br>para quem você ama</h2>
+      <p class="s-sub">Encomendas limitadas · Confecção artesanal · Entrega em Florianópolis</p>
+    </div>
+
+    <!-- BUQUÊS -->
+    <div class="cat-bar rv"><span class="cat-name">Buquês</span></div>
+    <div class="p-grid" id="g-buques"></div>
+
+    <!-- BOXES -->
+    <div class="cat-bar rv"><span class="cat-name">Flower Boxes</span></div>
+    <div class="p-grid" id="g-boxes"></div>
+
+    <!-- VASOS -->
+    <div class="cat-bar rv"><span class="cat-name">Vasos & Arranjos</span></div>
+    <div class="p-grid" id="g-vasos"></div>
+
+    <!-- KITS -->
+    <div class="cat-bar rv"><span class="cat-name">Kits Presente</span></div>
+    <div class="p-grid" id="g-kits"></div>
+
+  </div>
+
+  <!-- QUOTE BANNER -->
+  <div class="quote-banner">
+    <img src="images/0105_dia-das-maes.jpg" alt="Mulher com buquê de flores">
+    <div class="quote-overlay">
+      <div class="quote-text">
+        <span class="quote-mark">"</span>
+        <p class="quote-body">Ela é a razão<br>de você florescer.</p>
+        <p class="quote-attr">Arqflora · Dia das Mães 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="info-strip" id="info">
+    <div class="info-block rv">
+      <p class="ib-label">Como encomendar</p>
+      <div class="ib-rule"></div>
+      <p class="ib-text">
+        Clique em "Encomendar pelo WhatsApp" em qualquer produto para enviar sua escolha diretamente. As peças são artesanais e em quantidade limitada — antecipe seu pedido para garantir entrega no Dia das Mães.
+        <br><br>
+        <a href="https://wa.me/554832829895" target="_blank" rel="noopener">→ Falar com a Arqflora</a>
+      </p>
+    </div>
+    <div class="info-block rv delay-1">
+      <p class="ib-label">Entrega & Retirada</p>
+      <div class="ib-rule"></div>
+      <p class="ib-text">
+        Entregamos em <strong style="color:rgba(250,246,238,.85)">Jurerê sem custo adicional</strong>. Para os demais bairros de Florianópolis, consulte o valor de entrega pelo WhatsApp. Retirada disponível na loja.
+        <br><br>
+        SC-401, 401 Mall · Santo Antônio de Lisboa
+      </p>
+    </div>
+    <div class="info-block rv delay-2">
+      <p class="ib-label">Pagamento & Contato</p>
+      <div class="ib-rule"></div>
+      <p class="ib-text">
+        Aceitamos cartão (presencial) e Pix / transferência eletrônica para compras online.
+        <br><br>
+        <a href="tel:4832829895">48 3282-9895</a>
+        <br>
+        <a href="https://instagram.com/arqflora" target="_blank" rel="noopener">@arqflora</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="ft-logo">Arqflora</span>
+    <ul class="ft-links">
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="https://instagram.com/arqflora" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://wa.me/554832829895" target="_blank" rel="noopener">WhatsApp</a></li>
+    </ul>
+    <span class="ft-copy">© 2026 Arqflora · Flores para quem te fez florescer</span>
+  </footer>
+
+  <!-- FLOATING WA BUTTON -->
+  <a class="float-wa" href="https://wa.me/554832829895" target="_blank" rel="noopener" aria-label="Contato via WhatsApp">
+    <svg viewBox="0 0 24 24" fill="#fff">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script>
+    /* ── DATA ─────────────────────────────────────────── */
+    const WA = '554832829895';
+
+    const catalog = {
+      'g-buques': [
+        {
+          cat: 'Buquê de Flores',
+          name: 'Buquê de Flores',
+          desc: 'Combinação harmoniosa de flores variadas com eucalipto, embaladas em papel kraft com fita de cetim. O presente clássico que nunca sai de moda.',
+          sizes: [
+            { l: 'Pequeno', p: 240 },
+            { l: 'Médio',   p: 320 },
+            { l: 'Grande',  p: 420 }
+          ],
+          colors: ['Tons Suaves', 'Cor-de-Rosa', 'Cor-de-Rosa Escuro', 'Terrosos', 'Branco & Verde'],
+          def: 1
+        },
+        {
+          cat: 'Rose Buquê',
+          name: 'Rose Buquê',
+          desc: 'Buquê exclusivo de rosas selecionadas com ruscos, para quem merece o mais refinado. Disponível em três tamanhos com quantidade de hastes garantida.',
+          sizes: [
+            { l: 'P · 6 rosas',  p: 180 },
+            { l: 'M · 12 rosas', p: 320 },
+            { l: 'G · 24 rosas', p: 580 }
+          ],
+          colors: ['Vermelho', 'Cor-de-Rosa Claro', 'Cor-de-Rosa Intenso', 'Branco'],
+          def: 1
+        }
+      ],
+      'g-boxes': [
+        {
+          cat: 'Flower Box',
+          name: 'Flower Box',
+          desc: 'Caixa elegante com combinação sofisticada de flores variadas na tonalidade escolhida. Uma declaração de cuidado e beleza.',
+          sizes: [
+            { l: 'Pequena', p: 280 },
+            { l: 'Média',   p: 380 },
+            { l: 'Grande',  p: 560 }
+          ],
+          colors: ['Tons Suaves', 'Cor-de-Rosa Intenso', 'Terrosos', 'Branco & Verde'],
+          def: 1
+        },
+        {
+          cat: 'Rose Box',
+          name: 'Rose Box',
+          desc: 'Caixa luxuosa preenchida generosamente com rosas e ruscos. Para quem merece ser surpreendida com grandiosidade e elegância.',
+          sizes: [
+            { l: 'P · ~28 rosas', p: 480  },
+            { l: 'M · ~48 rosas', p: 760  },
+            { l: 'G · ~56 rosas', p: 960  }
+          ],
+          colors: ['Mix Cor-de-Rosa', 'Rosa Claro', 'Rosa Escuro', 'Vermelho', 'Branco'],
+          def: 1
+        }
+      ],
+      'g-vasos': [
+        {
+          cat: 'Arranjo em Vaso',
+          name: 'Vaso Pequeno com Flores',
+          desc: 'Vaso cerâmico composto com flores variadas na tonalidade escolhida. Um arranjo duradouro que decora o ambiente enquanto as flores estão frescas.',
+          sizes: [{ l: 'Tamanho Único', p: 240 }],
+          colors: ['Tons Suaves', 'Cor-de-Rosa Intenso', 'Terrosos', 'Branco & Verde'],
+          def: 0
+        },
+        {
+          cat: 'Arranjo em Vidro',
+          name: 'Cilindro de Vidro com Eucalipto',
+          desc: 'Elegante cilindro de vidro transparente com flores frescas e eucalipto. Um arranjo de impacto visual, moderno e refinado para ambientes sofisticados.',
+          sizes: [{ l: 'Tamanho Único', p: 460 }],
+          colors: ['Branco & Verde', 'Tons Suaves', 'Cor-de-Rosa Intenso', 'Terrosos'],
+          def: 0
+        }
+      ],
+      'g-kits': [
+        {
+          cat: 'Kit Presente',
+          name: 'Flower & Sweet Box',
+          desc: 'Flores variadas combinadas com doces selecionados para adoçar ainda mais o momento especial. O presente completo para mães que merecem tudo.',
+          sizes: [{ l: 'Único · Flores + Doces', p: 400 }],
+          colors: ['Tons Suaves', 'Cor-de-Rosa', 'Mix Colorido'],
+          def: 0
+        },
+        {
+          cat: 'Kit Presente · P',
+          name: 'Caixa Presente P',
+          desc: 'Flores + Mini Espumante Freixenet + Mini Trufas Kopenhagen. Para surpreender com elegância e doçura em um único presente.',
+          sizes: [{ l: 'Caixa P', p: 290 }],
+          colors: ['Tons Suaves', 'Cor-de-Rosa', 'Mix Colorido'],
+          def: 0
+        },
+        {
+          cat: 'Kit Presente · M',
+          name: 'Caixa Presente M',
+          desc: 'Flores + Caixa de Chocolates Kopenhagen. Uma combinação que encanta os sentidos e celebra com sofisticação quem você ama.',
+          sizes: [{ l: 'Caixa M', p: 390 }],
+          colors: ['Tons Suaves', 'Cor-de-Rosa', 'Mix Colorido'],
+          def: 0
+        },
+        {
+          cat: 'Kit Presente · G',
+          name: 'Caixa Presente G',
+          desc: 'Flores + Espumante Freixenet + 1 Caixa de Chocolates Kopenhagen. O kit máximo para mães que merecem ser celebradas com grandiosidade.',
+          sizes: [{ l: 'Caixa G', p: 490 }],
+          colors: ['Tons Suaves', 'Cor-de-Rosa', 'Mix Colorido'],
+          def: 0
+        }
+      ]
+    };
+
+    /* ── CARD BUILDER ─────────────────────────────────── */
+    function buildCard(product) {
+      const state = { si: product.def, ci: 0 };
+      const el = document.createElement('article');
+      el.className = 'p-card rv';
+
+      function waLink() {
+        const sz = product.sizes[state.si];
+        const cl = product.colors[state.ci];
+        const msg =
+          `Olá, Arqflora! 🌸\n\nGostaria de encomendar pelo catálogo do Dia das Mães:\n\n` +
+          `*${product.name}*\n` +
+          `Tamanho: ${sz.l}\n` +
+          `Tonalidade: ${cl}\n` +
+          `Valor: R$ ${sz.p.toFixed(2).replace('.',',')}\n\n` +
+          `Aguardo informações sobre disponibilidade e entrega. Obrigada! 💚`;
+        return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+      }
+
+      function draw() {
+        const sz = product.sizes[state.si];
+        const cents = (sz.p % 1 === 0) ? ',00' : ',' + String(sz.p.toFixed(2)).split('.')[1];
+        const whole = Math.floor(sz.p);
+
+        el.innerHTML = `
+          <p class="pc-cat">${product.cat}</p>
+          <h3 class="pc-name">${product.name}</h3>
+          <p class="pc-desc">${product.desc}</p>
+
+          ${product.sizes.length > 1 ? `
+            <p class="sel-label">Tamanho</p>
+            <div class="size-row">
+              ${product.sizes.map((s,i)=>`
+                <button class="size-pill${i===state.si?' on':''}" data-si="${i}">${s.l}</button>
+              `).join('')}
+            </div>
+          ` : ''}
+
+          <p class="sel-label">Tonalidade</p>
+          <div class="color-row">
+            ${product.colors.map((c,i)=>`
+              <button class="color-pill${i===state.ci?' on':''}" data-ci="${i}">${c}</button>
+            `).join('')}
+          </div>
+
+          <div class="pc-price-row">
+            <p class="pc-price"><sup>R$</sup>${whole}${cents}</p>
+          </div>
+
+          <a class="btn-wa" href="${waLink()}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Encomendar pelo WhatsApp
+          </a>
+        `;
+
+        el.querySelectorAll('.size-pill').forEach(b => b.addEventListener('click', () => {
+          state.si = +b.dataset.si; draw();
+        }));
+        el.querySelectorAll('.color-pill').forEach(b => b.addEventListener('click', () => {
+          state.ci = +b.dataset.ci; draw();
+        }));
+      }
+
+      draw();
+      return el;
+    }
+
+    /* ── RENDER GRIDS ─────────────────────────────────── */
+    Object.entries(catalog).forEach(([id, items]) => {
+      const grid = document.getElementById(id);
+      if (!grid) return;
+      items.forEach((p, i) => {
+        const card = buildCard(p);
+        if (i > 0) card.classList.add(`delay-${Math.min(i,3)}`);
+        grid.appendChild(card);
+      });
+    });
+
+    /* ── NAV SCROLL ───────────────────────────────────── */
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 50);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* ── HERO KEN BURNS ───────────────────────────────── */
+    const heroImg = document.getElementById('heroBg');
+    const triggerReady = () => heroImg.classList.add('ready');
+    if (heroImg.complete && heroImg.naturalWidth > 0) { setTimeout(triggerReady, 80); }
+    else { heroImg.addEventListener('load', triggerReady); }
+
+    /* ── SCROLL REVEAL ────────────────────────────────── */
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+
+    function observeAll() {
+      document.querySelectorAll('.rv:not([data-obs])').forEach(el => {
+        el.setAttribute('data-obs', '1');
+        obs.observe(el);
+      });
+    }
+
+    observeAll();
+    new MutationObserver(observeAll).observe(document.body, { childList: true, subtree: true });
+  </script>
+</body>
+</html>
